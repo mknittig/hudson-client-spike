@@ -10,6 +10,8 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.util.URIUtil;
 
+import de.knittig.spike.hudson.Job;
+
 
 public class HudsonClientImpl implements HudsonClient {
 
@@ -21,11 +23,11 @@ public class HudsonClientImpl implements HudsonClient {
         this.httpClient = new HttpClient();
     }
 
-    public void createJob(String name, String xmlConfiguration) {
+    public void createJob(Job job) {
         PostMethod createItemRequest = new PostMethod(hudsonUrl + "/createItem");
         try {
-            createItemRequest.setQueryString(URIUtil.encodeQuery("name=" + name));
-            createItemRequest.setRequestEntity(new StringRequestEntity(xmlConfiguration, "text/xml", "UTF-8"));
+            createItemRequest.setQueryString(URIUtil.encodeQuery("name=" + job.getName()));
+            createItemRequest.setRequestEntity(new StringRequestEntity(job.getXmlConfiguration(), "text/xml", "UTF-8"));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -50,8 +52,8 @@ public class HudsonClientImpl implements HudsonClient {
         }
     }
 
-    public void buildJob(String name) {
-        GetMethod buildRequest = new GetMethod(hudsonUrl + "/job/" + name + "/build");
+    public void buildJob(Job job) {
+        GetMethod buildRequest = new GetMethod(hudsonUrl + "/job/" + job.getName() + "/build");
         executeMethod(buildRequest);
     }
 

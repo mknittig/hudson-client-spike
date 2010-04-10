@@ -1,8 +1,13 @@
 package de.knittig.spike.hudson.client;
 
+import java.util.List;
+
+import de.knittig.spike.hudson.Job;
+
 public interface HudsonClient {
 
-    void createJob(String name, String xmlConfiguration);
+    void createJob(Job job);
 
-    void buildJob(String name);
+    void buildJob(Job job);
+
 }
