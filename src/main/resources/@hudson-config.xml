@@ -1,8 +1,0 @@
-HTTP/1.1 400 Bad Request
-Server: Winstone Servlet Engine v0.9.10
-Content-Length: 298
-Connection: Keep-Alive
-Content-Type: text/html;charset=UTF-8
-Date: Sat, 10 Apr 2010 11:44:57 GMT
-X-Powered-By: Servlet/2.5 (Winstone/0.9.10)
-
