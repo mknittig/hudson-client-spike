@@ -14,8 +14,10 @@ public class Main {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
+        String projectName = "hudson-client-spike";
         HudsonClient hudsonClient = new HudsonClientImpl("http://localhost:8080");
-        hudsonClient.createJob("hudson-client-spike", IOUtils.toString(Main.class.getResourceAsStream("/hudson-config.xml")));
+        hudsonClient.createJob(projectName, IOUtils.toString(Main.class.getResourceAsStream("/hudson-config.xml")));
+        hudsonClient.buildJob(projectName);
     }
 
 }

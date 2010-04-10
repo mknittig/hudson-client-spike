@@ -1,11 +1,11 @@
 package de.knittig.spike.hudson.client;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.HttpStatus;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.util.URIUtil;
@@ -48,6 +48,11 @@ public class HudsonClientImpl implements HudsonClient {
         } finally {
             method.releaseConnection();
         }
+    }
+
+    public void buildJob(String name) {
+        GetMethod buildRequest = new GetMethod(hudsonUrl + "/job/" + name + "/build");
+        executeMethod(buildRequest);
     }
 
 }
