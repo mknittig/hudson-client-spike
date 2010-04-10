@@ -19,6 +19,9 @@ public class Main {
         HudsonClient hudsonClient = new HudsonClientImpl("http://localhost:8080");
         hudsonClient.createJob(job);
         hudsonClient.buildJob(job);
+        for (Job j : hudsonClient.getJobs()) {
+            System.out.println(j.getName());
+        }
     }
 
 }

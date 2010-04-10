@@ -10,4 +10,6 @@ public interface HudsonClient {
 
     void buildJob(Job job);
 
+    List<Job> getJobs();
+
 }
