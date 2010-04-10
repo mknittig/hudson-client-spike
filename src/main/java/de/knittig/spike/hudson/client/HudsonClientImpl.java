@@ -8,6 +8,7 @@ import org.apache.commons.httpclient.HttpMethodBase;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
+import org.apache.commons.httpclient.util.URIUtil;
 
 
 public class HudsonClientImpl implements HudsonClient {
@@ -22,13 +23,13 @@ public class HudsonClientImpl implements HudsonClient {
 
     public void createJob(String name, String xmlConfiguration) {
         PostMethod createItemRequest = new PostMethod(hudsonUrl + "/createItem");
-        createItemRequest.setParameter("name", name);
         try {
+            createItemRequest.setQueryString(URIUtil.encodeQuery("name=" + name));
             createItemRequest.setRequestEntity(new StringRequestEntity(xmlConfiguration, "text/xml", "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        createItemRequest.setRequestHeader("Content-type","text/xml; charset=UTF-8");
+        createItemRequest.setRequestHeader("Content-type", "text/xml; charset=UTF-8");
 
         executeMethod(createItemRequest);
 
